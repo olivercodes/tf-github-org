@@ -86,8 +86,8 @@ resource "github_repository_file" "deploy_yml" {
   overwrite_on_create = true
 }
 
-data "github_user" "prow-git" {
-  username = "prow-git"
+data "github_user" "oc-ci-robot" {
+  username = "oc-ci-robot"
 }
 
 resource "github_branch_protection" "repos_branch_protection" {
@@ -102,7 +102,7 @@ resource "github_branch_protection" "repos_branch_protection" {
   }
   enforce_admins = false
   push_restrictions = [
-    data.github_user.prow-git.node_id,
+    data.github_user.oc-ci-robot.node_id,
   ]
   repository_id  = each.value.node_id
   pattern        = var.org_config.default_branch
