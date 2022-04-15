@@ -1,5 +1,6 @@
 locals {
-  org_members = toset(distinct(concat(var.owners_aliases.contributors, var.owners_aliases.leads )))
+  org_members = toset(distinct(concat(var.owners_aliases.contributors)))
+  org_admins  = toset(distinct(concat(var.owners_aliases.leads)))
 }
 
 resource "github_repository" "repos" {
@@ -112,6 +113,12 @@ resource "github_membership" "org_members" {
   for_each = local.org_members
   username = each.value
   role     = "member"
+}
+
+resource "github_membership" "org_admins" {
+  for_each = local.org_admins
+  username = each.value
+  role     = "admin"
 }
 
 resource "github_team" "repo_owners" {
