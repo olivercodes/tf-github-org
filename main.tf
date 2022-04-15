@@ -104,7 +104,7 @@ resource "github_branch_protection" "repos_branch_protection" {
   push_restrictions = [
     data.github_user.oc-ci-robot.node_id,
   ]
-  repository_id  = each.value.node_id
+  repository_id  = each.value.name
   pattern        = var.org_config.default_branch
 }
 
