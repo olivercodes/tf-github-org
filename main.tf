@@ -48,44 +48,44 @@ resource "github_repository_file" "OWNERSALIASES" {
   overwrite_on_create = true
 }
 
-resource "github_repository_file" "build_yml" {
-  depends_on = [github_repository.repos]
-  for_each   = github_repository.repos
-  repository = each.value.name
-  branch     = "main"
-  file       = ".github/workflows/build.yml"
-  content    = file("${path.root}/common-files/build.yml")
-  commit_message      = "Github actions build.yml, Managed by Terraform"
-  commit_author       = "Terraform"
-  commit_email        = "terraform@olivercodes.com"
-  overwrite_on_create = true
-}
+# resource "github_repository_file" "build_yml" {
+#   depends_on = [github_repository.repos]
+#   for_each   = github_repository.repos
+#   repository = each.value.name
+#   branch     = "main"
+#   file       = ".github/workflows/build.yml"
+#   content    = file("${path.root}/common-files/build.yml")
+#   commit_message      = "Github actions build.yml, Managed by Terraform"
+#   commit_author       = "Terraform"
+#   commit_email        = "terraform@olivercodes.com"
+#   overwrite_on_create = true
+# }
 
-resource "github_repository_file" "makefile" {
-  depends_on = [github_repository.repos]
-  for_each   = github_repository.repos
-  repository = each.value.name
-  branch     = "main"
-  file       = "./Makefile"
-  content    = file("${path.root}/common-files/Makefile")
-  commit_message      = "Github actions build.yml, Managed by Terraform"
-  commit_author       = "Terraform"
-  commit_email        = "terraform@olivercodes.com"
-  overwrite_on_create = true
-}
+# resource "github_repository_file" "makefile" {
+#   depends_on = [github_repository.repos]
+#   for_each   = github_repository.repos
+#   repository = each.value.name
+#   branch     = "main"
+#   file       = "./Makefile"
+#   content    = file("${path.root}/common-files/Makefile")
+#   commit_message      = "Github actions build.yml, Managed by Terraform"
+#   commit_author       = "Terraform"
+#   commit_email        = "terraform@olivercodes.com"
+#   overwrite_on_create = true
+# }
 
-resource "github_repository_file" "deploy_yml" {
-  depends_on = [github_repository.repos]
-  for_each   = github_repository.repos
-  repository = each.value.name
-  branch     = "main"
-  file       = ".github/workflows/deploy.yml"
-  content    = file("${path.root}/common-files/deploy.yml")
-  commit_message      = "Github actions deploy.yml, Managed by Terraform"
-  commit_author       = "Terraform"
-  commit_email        = "terraform@olivercodes.com"
-  overwrite_on_create = true
-}
+# resource "github_repository_file" "deploy_yml" {
+#   depends_on = [github_repository.repos]
+#   for_each   = github_repository.repos
+#   repository = each.value.name
+#   branch     = "main"
+#   file       = ".github/workflows/deploy.yml"
+#   content    = file("${path.root}/common-files/deploy.yml")
+#   commit_message      = "Github actions deploy.yml, Managed by Terraform"
+#   commit_author       = "Terraform"
+#   commit_email        = "terraform@olivercodes.com"
+#   overwrite_on_create = true
+# }
 
 data "github_user" "oc-ci-robot" {
   username = "oc-ci-robot"
