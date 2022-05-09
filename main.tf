@@ -91,23 +91,23 @@ data "github_user" "oc-ci-robot" {
   username = "oc-ci-robot"
 }
 
-resource "github_branch_protection" "repos_branch_protection" {
-  depends_on     = [github_repository_file.OWNERSALIASES]
-  for_each       = github_repository.repos
-  required_status_checks {
-    strict   = true
-    contexts = ["build", "tf-apply"]
-  }
-  required_pull_request_reviews {
-    dismiss_stale_reviews = true
-  }
-  enforce_admins = false
-  push_restrictions = [
-    data.github_user.oc-ci-robot.node_id,
-  ]
-  repository_id  = each.value.name
-  pattern        = var.org_config.default_branch
-}
+# resource "github_branch_protection" "repos_branch_protection" {
+#   depends_on     = [github_repository_file.OWNERSALIASES]
+#   for_each       = github_repository.repos
+#   required_status_checks {
+#     strict   = true
+#     contexts = ["build", "tf-apply"]
+#   }
+#   required_pull_request_reviews {
+#     dismiss_stale_reviews = true
+#   }
+#   enforce_admins = false
+#   push_restrictions = [
+#     data.github_user.oc-ci-robot.node_id,
+#   ]
+#   repository_id  = each.value.name
+#   pattern        = var.org_config.default_branch
+# }
 
 resource "github_membership" "org_members" {
   for_each = local.org_members
